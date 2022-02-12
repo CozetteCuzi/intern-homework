@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\BrokerRepository;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -18,7 +19,7 @@ class MainPageController extends BaseController
 
     public function __construct()
     {
-        $this->data = (new \App\Repositories\BrokerRepository)->getBrokers();
+        $this->data = (new BrokerRepository)->getBrokers();
     }
 
     public function __invoke(): View
@@ -36,7 +37,8 @@ class MainPageController extends BaseController
 
     public function getTopThree(): array|\Illuminate\Support\Collection
     {
-        return $this->getAllSorted()->filter(function ($item) {
+        return $this->getAllSorted()
+            ->filter(function ($item) {
             $date = new Carbon($item->reviewDate);
             return $date->year == 2020;
         })->take(3);
@@ -44,7 +46,8 @@ class MainPageController extends BaseController
 
     public function getWithNoInactivityFees(): array|\Illuminate\Support\Collection
     {
-        return $this->getAllSorted()->where('hasInactivityFee', false);
+        return $this->getAllSorted()
+            ->where('hasInactivityFee', false);
     }
 
     public function getOneRandomly(): \Illuminate\Http\JsonResponse
