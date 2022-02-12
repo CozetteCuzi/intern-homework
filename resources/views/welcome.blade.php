@@ -14,9 +14,9 @@
         <main>
             <h1>Broker lists</h1>
             <div class="broker-list-container">
-                <x-broker-list title="Top 3 brokers in 2020" :brokers="$brokers" />
-                <x-broker-list title="All stock brokers" :brokers="$brokers" />
-                <x-broker-list title="Brokers with no inactivity fees" :brokers="$brokers" />
+                <x-broker-list title="Top 3 brokers in 2020" :brokers="$topThree" />
+                <x-broker-list title="All stock brokers" :brokers="$all" />
+                <x-broker-list title="Brokers with no inactivity fees" :brokers="$withNoInactivityFees" />
             </div>
         </main>
     </body>
